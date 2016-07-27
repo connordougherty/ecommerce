@@ -6,6 +6,10 @@
 </p>
 
 <p>
+  <strong>Brand:</strong>
+  <%= @product.brand %>
+</p>
+<p>
   <strong>Price:</strong>
   <%= @product.price %>
 </p>
@@ -30,6 +34,11 @@
   <%= @product.category_id %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @product.image.url(:thumb) %>
+</p>
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to 'Back', all_path %>

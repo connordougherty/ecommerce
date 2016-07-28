@@ -7,7 +7,52 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="container-fluid">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class=r"navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				</button>
+
+				<%= link_to 'VAPELIFE', all_path, class: 'navbar-brand' %>
+			</div>
+
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          	<% @categories.each do |category| %>
+          	  <li><%= link_to category.name, categorical_path(category_id: category.id) %></li>
+            <% end %>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brands<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          	<% @brands.each do |brand| %>
+          	  <li><%= link_to brand, branding_path(brand: brand) %></li>
+            <% end %>
+          </ul>
+        </li>
+			</ul>
+
+			<div>
+				<ul class="nav navbar-nav navbar-right">
+					<% if user_signed_in? %>
+						<p class="navbar-text">Logged in as <%= current_user.email %></p>
+						<li><%= button_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
+					<% else %>
+						<li><%= button_to 'Sign Up', new_user_registration_path, method: :get , action: :new, class: 'btn btn-default navbar-btn' %></li>
+						<li><%= button_to 'Log In', new_user_session_path, class: 'btn btn-default navbar-btn' %></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<p id="notice"><%= notice %></p>
+
+	<div class="container">
 		<%= yield %>
 	</div>
 </body>

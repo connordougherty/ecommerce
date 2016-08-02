@@ -10,7 +10,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class=r"navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 				</button>
 
 				<%= link_to 'VAPELIFE', all_path, class: 'navbar-brand' %>
@@ -40,6 +40,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<% if user_signed_in? %>
 						<p class="navbar-text">Logged in as <%= current_user.email %></p>
+						<li><%= link_to 'My Cart', view_order_path %></li>
 						<li><%= button_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
 					<% else %>
 						<li><%= button_to 'Sign Up', new_user_registration_path, method: :get , action: :new, class: 'btn btn-default navbar-btn' %></li>

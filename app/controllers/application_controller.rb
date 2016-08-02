@@ -12,6 +12,5 @@ class ApplicationController < ActionController::Base
   def get_brands
   	@brands = Product.pluck(:brand).sort
   	@brands.uniq!
-
   end
 end

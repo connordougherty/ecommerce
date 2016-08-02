@@ -44,4 +44,21 @@ class CartController < ApplicationController
 
   	LineItem.destroy_all
   end
+
+  def order_complete
+    @order = Order.find(params[:order_id])
+    @amount = (@order.grand_total.to_f.round(2) * 100).to_i
+
+    customer = Stripe::Customer.create(
+      :email => current_user.email,
+      :card => params[:stripeToken]
+    )
+
+    Stripe::Charge.create(
+      :customer => customer.id,
+      :amount => @amount,
+      :description => 'Rails Stripe Customer',
+      :currency => 'usd'
+    )
+  end
 end
